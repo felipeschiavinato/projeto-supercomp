@@ -73,6 +73,7 @@ void BacktrackingClique(std::vector<int> &cliqueAtual,
     }
 }
 
+
 int main(int argc, char *argv[]) {
     MPI_Init(&argc, &argv);
 
@@ -83,22 +84,20 @@ int main(int argc, char *argv[]) {
     MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
 
     int numGraphs = 100;
+    std::ofstream outputFile; // Declare outputFile here
 
     for (int i = 0; i < 10; ++i) {
         if (world_rank == 0) {
-            // Only master process handles file output
             std::string outputFileName = "../../results/parallel/times/parallel_times_" + std::to_string(i) + ".txt";
-            std::ofstream outputFile(outputFileName);
+            outputFile.open(outputFileName);
         }
 
         for (int graphIndex = 1; graphIndex <= numGraphs; ++graphIndex) {
             int numVertices;
             std::string nomeArquivo = "../../graphs/s" + std::to_string(i) + "/grafo_" + std::to_string(graphIndex) + ".txt";
             
-            // All processes read the graph
             std::vector<std::vector<int>> grafo = LerGrafo(nomeArquivo, numVertices);
 
-            // Parallel section starts
             auto start = MPI_Wtime();
 
             std::set<std::vector<int>> cliquesMaximos;
@@ -115,13 +114,9 @@ int main(int argc, char *argv[]) {
 
             auto end = MPI_Wtime();
 
-            // Parallel section ends
-
             if (world_rank == 0) {
-                // Only master process handles timing and output
-                std::chrono::duration<double> duration = end - start;
-                outputFile << nomeArquivo << " " << duration.count() << std::endl;
-
+                auto duration = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
+                outputFile << nomeArquivo << " " << duration.count() << " seconds" << std::endl;
                 std::cout << "Graph " << graphIndex << " took " << duration.count() << " seconds" << std::endl;
             }
         }

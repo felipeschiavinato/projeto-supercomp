@@ -97,17 +97,6 @@ std::set<std::vector<int>> EncontrarCliquesMaximos(const std::vector<std::vector
 }
 
 
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <string>
-#include <set>
-#include <algorithm>
-#include <chrono>
-#include <omp.h>
-
-// ... [rest of your existing code] ...
-
 int main() {
     int numGraphs = 100;
 
