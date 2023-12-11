@@ -27,7 +27,7 @@ Cada processo lê e processa um subconjunto dos grafos. Isso é feito pelo loop 
 O código mede o tempo de processamento de cada grafo, calculando a diferença entre o tempo no início e no final do processamento.
 
 
-## Amoastragem
+## Amostragem
 Utilizamos um script Python `python\run.py` para gerar 100 grafos diferentes, onde o primeiro possui um nó e o último possui 100 nós. Este processo foi repetido 10 vezes, criando grafos em pastas separadas para fins de amostragem `graphs/`.
 
 ## Medição de Desempenho
