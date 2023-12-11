@@ -3,7 +3,7 @@
 ## Descrição
 Este projeto tem como objetivo encontrar cliques máximas em grafos utilizando diferentes abordagens: sequencial, OpenMP e MPI. O algoritmo utilizado é recursivo com backtracking, iterando sobre cada nó do grafo e armazenando os resultados em um conjunto para eliminar repetições, este código sequencial encontra-se em `cpp\sequencial\exhaustion_seq.cpp`. 
 
-Ao desenvolver o algoritimo basicamente escolhemos um nó e tentamos extender a clique com os vizinhos deste nó, se não for possível, removemos o nó e tentamos com outro nó. O algoritmo termina quando não é possível extender a clique com nenhum nó, ou seja, quando a clique é máxima. Fazendo isso para todos os nós do grafo, e tratando as repetições, encontramos todas as cliques máximas do grafo. Para finalizar basta encontrar dentre as cliques máximas a maior delas. Esta parte final em alto nivel seria apenas um `max()` com `chave=len()`. E como não estamos tratando estabilidade, esta parte O(n) foi desconsiderada nas medições de tempo. Para grafos muito grandes, talvez fosse interessante otimizar esta parte com mpi e veriamos ganhos no tempo de execução.
+Ao desenvolver o algoritimo basicamente escolhemos um nó e tentamos extender a clique com os vizinhos deste nó, se não for possível, removemos o nó e tentamos com outro nó. O algoritmo termina quando não é possível extender a clique com nenhum nó, ou seja, quando a clique é máxima. Fazendo isso para todos os nós do grafo, e tratando as repetições, encontramos todas as cliques máximas do grafo. Para finalizar, basta encontrar dentre as cliques máximas a maior delas. Esta parte final em alto nível seria apenas um `max()` com `chave=len()`. E como não estamos tratando estabilidade, esta parte O(n) foi desconsiderada nas medições de tempo. Para grafos muito grandes, talvez fosse interessante otimizar esta parte com mpi e veriamos ganhos no tempo de execução.
 
 Finalmente, cada algoritimo foi validado com o codigo `verify.py` que verifica se o resultado encontrado é realmente a maior clique máxima antes de ser adaptado à nova versao descrita acima.
 
@@ -44,7 +44,7 @@ Aqui podemos observar que o algoritmo sequencial é o mais lento, seguido pelo O
 A minha maquina local possui um processador com 6 cores e 12 cpus, por isso o OpenMP foi executado com 12 threads localmente assim como o algorítimo sequencial.
 Ja o algoritimo MPI foi executado em uma VM Linux com 3 cores e 6 cpus, por isso foi executado com 6 processos.
 ![cpu](img/6-cpu.png)
-
 Ou seja, caso o codigo MPI tivesse sido executado localmente com 12 processos, o tempo de execução seria ainda menor do que o apresentado no gráfico.
+- os executaveis do codigo sequencial e openmp foram compilados para `Windows` enquanto o executavel do codigo mpi for compilado para `Linux`
 
 
