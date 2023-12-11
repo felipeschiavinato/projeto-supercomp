@@ -43,7 +43,9 @@ Aqui podemos observar que o algoritmo sequencial é o mais lento, seguido pelo O
 ## Nota
 A minha maquina local possui um processador com 6 cores e 12 cpus, por isso o OpenMP foi executado com 12 threads localmente assim como o algorítimo sequencial.
 Ja o algoritimo MPI foi executado em uma VM Linux com 3 cores e 6 cpus, por isso foi executado com 6 processos.
+
 ![cpu](img/6-cpu.png)
+
 Ou seja, caso o codigo MPI tivesse sido executado localmente com 12 processos, o tempo de execução seria ainda menor do que o apresentado no gráfico.
 - os executaveis do codigo sequencial e openmp foram compilados para `Windows` enquanto o executavel do codigo mpi for compilado para `Linux`
 
